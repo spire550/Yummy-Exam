@@ -1,8 +1,7 @@
 $(document).ready(function () {
   $("#loading").fadeOut(1000, () => {
     $("body").css("overflow", "visible");
-    // $('#loading').addClass('d-none');
-    // $('#loading').removeClass('d-flex');
+    
   });
 });
 async function getMeal() {
@@ -11,7 +10,6 @@ async function getMeal() {
   );
   let finalResult = await apiResponse.json();
   displayMeal(finalResult.meals, 0);
-  // console.log(finalResult.meals);
   getMealDetail();
 }
 getMeal();
@@ -86,7 +84,7 @@ function displayDetails(dataAPI) {
                 <div class="col-md-8 ">
                 <div class=" position-relative">
                 <h2>Instructions</h2>
-                <button class="btn-close btn-close-white position-absolute  top-0 end-0 " id="btnClose" onClick="window.location.reload();"></button>
+                <button class="btn-close btn-close-white position-absolute  top-0 end-0 " id="btnClose" onclick="testt()"></button>
                 </div>
                 <p>${dataAPI.meals[0].strInstructions}</p>
                 <h3><span class="fw-bolder">Area : </span>${dataAPI.meals[0].strArea}</h3>
@@ -108,6 +106,15 @@ function displayDetails(dataAPI) {
   document.getElementById("mealDetails").innerHTML = cartona;
   // console.log(dataAPI);
 }
+function testt() {
+  var x = document.getElementById("displayDetail");
+  var y = document.getElementById("details");
+  if (!x.classList.contains("nonActive")) {
+    $("#displayDetail").addClass("nonActive");
+    $("#details").removeClass("nonActive");
+  }
+}
+
 /////////////////////////Navv/////////////////////////////
 function openSlide() {
   $(".overlay").animate({ left: "0px" }, 500);
@@ -170,11 +177,14 @@ function openSearch() {
 async function searchByName(term) {
   let apiResponse = await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
+    
   );
   let finalResult = await apiResponse.json();
   // let meals = finalResult.meals;
   displayMeal(finalResult.meals, 1);
   console.log(finalResult.meals);
+  getMealDetail();
+
 }
 async function searchByLetter(letter) {
   let apiResponse = await fetch(
@@ -325,7 +335,7 @@ function displayCategoryDetails(dataAPI) {
                 <div class="col-md-8">
                 <div class=" position-relative">
                 <h2>Instructions</h2>
-                <button class="btn-close btn-close-white position-absolute  top-0 end-0 " id="btnClose" onClick="window.location.reload();"></button>
+                <button class="btn-close btn-close-white position-absolute  top-0 end-0 " id="btnClose" onclick="testt2()"></button>
                 </div>
                 
                 <p>${dataAPI.meals[0].strInstructions}</p>
@@ -347,6 +357,16 @@ function displayCategoryDetails(dataAPI) {
   document.getElementById("categoryDetails").innerHTML = cartona;
   // console.log(dataAPI);
 }
+function testt2() {
+  var x = document.getElementById("displayCategoryDetail");
+  var y = document.getElementById("details");
+  if (!x.classList.contains("nonActive")) {
+    $("#displayCategoryDetail").addClass("nonActive");
+    $("#categoryBox").removeClass("nonActive");
+  }
+}
+
+
 ///////////////////Area////////////////////////////////
 $("#AreaInput").click(function () {
   openAria();
